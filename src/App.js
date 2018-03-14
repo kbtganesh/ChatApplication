@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import openSocket from "socket.io-client";
 
-const socket = openSocket("http://firstmw.herokuapp.com");
+const socket = openSocket("https://firstmw.herokuapp.com");
 // const  socket = openSocket('http://localhost:8000');
 
 class App extends Component {
