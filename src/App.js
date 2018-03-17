@@ -72,7 +72,8 @@ class App extends Component {
   };
 
   send = () => {
-    Scroll.animateScroll.scrollToBottom();
+    this.state.chatList.length > 2 && Scroll.animateScroll.scrollToBottom();
+    this.refs.txt.focus();
     socket.emit("chat message", DM.UserID, this.state.sendMsg);
     this.setState({sendMsg: ''});
   }
@@ -94,6 +95,7 @@ class App extends Component {
 
         <div className={(this.state.animate && "footer-anim") + " footer"}>
           <input
+          ref = 'txt'
             className="txt-msg"
             type="text"
             value={this.state.sendMsg}
