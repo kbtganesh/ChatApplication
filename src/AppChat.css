@@ -1,0 +1,130 @@
+.chat-app {
+  background: rgb(255, 238, 165);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chat-app .header {
+  background: khaki;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 4;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.chat-app .header-anim {
+  animation: reduce-header 1s forwards;
+}
+
+.chat-app .body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: rgb(255, 238, 165);
+  flex: 8;
+}
+
+.chat-app .body .start {
+  padding: 2%;
+  position: fixed;
+  left: 45%;
+  top: 48%;
+  background: #ffd653;
+}
+
+.chat-app .footer {
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  display: flex;
+  transform: scale(0);
+  box-shadow: 0px 16px 64px grey;  
+}
+
+.chat-app .footer-anim {
+  animation: increase-footer 1s forwards;
+}
+
+.chat-app .footer .txt-msg {
+  width: 80%;
+  height: 70%;
+  border: 1px solid yellow;
+  border-radius: 30px;
+  padding-left: 16px;
+  font-size: 16px;
+}
+
+.chat-app .footer .btn-send {
+  background: #ffeea5;
+  width: 15%;
+  height: 60%;
+  border-radius: 40px;
+  border: none;
+}
+
+.chat-app .body .chat-bubble {
+    display: flex;
+    border-top: 1px solid #ffcf95;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: 12px 32px;
+}
+
+@media only screen and (max-width: 600px) {
+    .chat-app .body .chat-bubble{
+        padding: 12px 12px;
+    }
+    .chat-app .footer .txt-msg{
+        margin-left: 12px;
+    }
+}
+
+.chat-bubble .chat-user{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-bubble .chat-user .user-icon{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d4c96c;
+    font-size: 14px;
+    border-radius: 50%;
+}
+
+.chat-bubble .chat-user .user-name{
+    font-size: 12px;
+}
+
+.chat-bubble .chat-message{
+    font-size: 16px;
+    padding-left: 12px;
+    flex: 15;
+}
+
+@keyframes reduce-header {
+  to {
+    flex: 1;
+    padding-left: 16px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+@keyframes increase-footer {
+  to {
+    transform: scale(1);
+  }
+}
