@@ -5,6 +5,8 @@ import "./App.css";
 import "./AppChat.css";
 import openSocket from "socket.io-client";
 import { DataManager as DM } from "./Utilities/DataManager";
+import * as Scroll from 'react-scroll';
+
 
 const socket = openSocket("https://firstmw.herokuapp.com");
 // const socket = openSocket("http://localhost:8000");
@@ -13,7 +15,7 @@ function isEmptyObj(obj){
   return Object.keys(obj).length === 0;
 }
 const ChatBubble = props => {
-  let selfStyle = props.self?{background: '#fff2b8'}:{};
+  let selfStyle = props.self?{background: 'rgba(255, 255, 255, 0.03)'}:{};
   console.log('props chat : ', props, selfStyle);
   return (
     <div className="chat-bubble" style={selfStyle}>
@@ -68,6 +70,12 @@ class App extends Component {
       chatList: [...prevState.chatList, obj],
     }));
   };
+
+  send = () => {
+    Scroll.animateScroll.scrollToBottom();
+    socket.emit("chat message", DM.UserID, this.state.sendMsg);
+    this.setState({sendMsg: ''});
+  }
   render() {
     return (
       <div className="chat-app">
@@ -78,7 +86,7 @@ class App extends Component {
         <div className="body">
           {!this.state.animate && (
             <div className="start" onClick={() => this.setState({ animate: true })}>
-              Let's Start
+              Start Chatting
             </div>
           )}
           {this.state.animate && this.state.chatList.map((item, i) => <ChatBubble key={i} self={item.self} user={item.user} message={item.message} />)}
@@ -92,14 +100,12 @@ class App extends Component {
             onChange={e => {
               this.setState({ sendMsg: e.target.value });
             }}
+            onKeyPress={(e)=>e.key === 'Enter'?this.send():''}
           />
           <button
             className="btn-send"
             type="submit"
-            onClick={() => {
-              socket.emit("chat message", DM.UserID, this.state.sendMsg);
-              this.setState({sendMsg: ''});
-            }}
+            onClick={this.send}
           >
             Send
           </button>
